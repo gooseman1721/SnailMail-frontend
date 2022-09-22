@@ -37,7 +37,7 @@ export default function LoginModal(props) {
                       <TextField></TextField>
                       <Stack mt='1em' direction='row' justifyContent='flex-center' gap='1em'>
                           <Button variant="contained">Log in</Button>
-                          <Button variant="outlined">Not registered?</Button>
+                          <Button variant="outlined" onClick={props.openRegisterModal}>Not registered?</Button>
                       </Stack>
                 </Stack>
 

@@ -12,6 +12,7 @@ import LoginModal from './components/LoginModal';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { blueGrey, grey, lightBlue, purple } from '@mui/material/colors';
 import { useState } from 'react';
+import RegisterModal from './components/RegisterModal';
 
 const theme = createTheme({
   palette: {
@@ -32,6 +33,10 @@ function App() {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleOpenLoginModal = () => setOpenLoginModal(true);
   const handleCloseLoginModal = () => setOpenLoginModal(false);
+
+  const [openRegisterModal, setOpenRegisterModal] = useState(false);
+  const handleOpenRegisterModal = () => setOpenRegisterModal(true);
+  const handleCloseRegisterModal = () => { setOpenRegisterModal(false); setOpenLoginModal(false) };
 
   return (
     <div className="App">
@@ -69,7 +74,8 @@ function App() {
               A demo here?
             </Typography>
           </Box>
-          <LoginModal open={openLoginModal} close={handleCloseLoginModal} />
+          <LoginModal open={openLoginModal} close={handleCloseLoginModal} openRegisterModal={handleOpenRegisterModal} />
+          <RegisterModal open={openRegisterModal} close={handleCloseRegisterModal} />
         </Container>
       </ThemeProvider>
       

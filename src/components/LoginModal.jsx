@@ -26,15 +26,12 @@ export default function LoginModal(props) {
             onClose={props.close}    
         >
             <Box sx={style}>
-                <Stack>
-                      <Typography variant="h6" component="h2">
-                          Username
+                <Stack gap='1em'>
+                      <Typography variant="h6" mb='0.5em'>
+                          Log in to your account
                       </Typography>
-                      <TextField></TextField>
-                      <Typography variant="h6" component="h2">
-                          Password
-                      </Typography>
-                      <TextField></TextField>
+                      <TextField variant="outlined" label='Username'></TextField>
+                      <TextField variant="outlined" label='Password' type='password' autoComplete="current-password"></TextField>
                       <Stack mt='1em' direction='row' justifyContent='flex-center' gap='1em'>
                           <Button variant="contained">Log in</Button>
                           <Button variant="outlined" onClick={props.openRegisterModal}>Not registered?</Button>

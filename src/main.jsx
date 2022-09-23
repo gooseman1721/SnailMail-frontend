@@ -37,7 +37,7 @@ const router = createBrowserRouter([
   },
   {
     path: "main/",
-    element: <FrontPage />,
+    element: <FrontPage theme={theme}/>,
     errorElement: <BasicErrorPage theme={theme} />
   }
 ]);

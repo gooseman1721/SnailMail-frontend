@@ -8,6 +8,8 @@ import Stack from '@mui/material/Stack';
 import LoginModal from '../components/LoginModal';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
+import { Link as RouterLink } from 'react-router-dom';
+
 import RegisterModal from '../components/RegisterModal';
 
 
@@ -45,7 +47,7 @@ function IntroPage(props) {
                 Snailmail is plepleplpe and Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ante libero, aliquam nec risus sed, placerat sodales nisl. Mauris scelerisque venenatis commodo. Donec ut nunc ex. Donec non ultrices erat, vel porttitor metus. Aenean gravida, nisi in viverra convallis, nibh lorem rhoncus diam, quis luctus lectus sem nec eros. Nunc vitae tellus urna. Sed id eleifend sapien.
               </Typography>
               <Stack direction='row' spacing={"5vw"} sx={{ alignSelf: 'center', py: '2vw' }}>
-                <Button variant='contained' >ENTER</Button>
+                <Button variant='contained' component={RouterLink} to='main/' >ENTER</Button>
                 <Button variant='outlined' >SOME OTHER OPTION</Button>
               </Stack>
             </Stack>

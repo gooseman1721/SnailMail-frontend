@@ -13,6 +13,7 @@ import BasicErrorPage from './routes/BasicErrorPage';
 
 import { createTheme } from '@mui/material';
 import { blueGrey, grey, lightBlue, purple } from '@mui/material/colors';
+import FrontPage from './routes/FrontPage';
 
 const theme = createTheme({
   palette: {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
     element: <IntroPage theme={theme} />,
     errorElement: <BasicErrorPage theme={theme}/>,
   },
+  {
+    path: "main/",
+    element: <FrontPage />,
+    errorElement: <BasicErrorPage theme={theme} />
+  }
 ]);
 
 

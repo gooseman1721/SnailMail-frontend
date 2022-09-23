@@ -16,14 +16,11 @@ export default function BasicErrorPage(props) {
           <Container>
               <Box>
                 <Stack gap='2em'>
-                      <Typography mt='0.5em' variant='h3' sx={{ alignSelf: 'center' }}>
-                          You've reached..
+                      <Typography mt='30%' variant='h3' sx={{ alignSelf: 'center' }}>
+                          <b>Sorry, an error has occured: </b>
                       </Typography>
-                      <Typography variant='h2' sx={{ alignSelf: 'center' }}>
-                          <b>the ERROR PAGE</b>
-                      </Typography>
-                      <Typography mt='15%' sx={{ alignSelf: 'center' }}>
-                          Sorry, an error has occured: <i>{error.statusText || error.message}</i>
+                      <Typography variant='h5' sx={{ alignSelf: 'center' }}>
+                          <i>{error.statusText || error.message}</i>
                       </Typography>
                 </Stack>
 

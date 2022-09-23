@@ -1,34 +1,17 @@
-import './App.css';
+import { useState } from 'react';
+
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Toolbar from '@mui/material/Toolbar';
-import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
-import LoginModal from './components/LoginModal';
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { blueGrey, grey, lightBlue, purple } from '@mui/material/colors';
-import { useState } from 'react';
-import RegisterModal from './components/RegisterModal';
+import LoginModal from '../components/LoginModal';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: blueGrey[500]
-    },
-    secondary: {
-      main: purple[200]
-    },
-    background: {
-      default: "#fafafa"
-    }
-  },
-})
+import RegisterModal from '../components/RegisterModal';
 
-function App() {
+
+function IntroPage(props) {
 
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const handleOpenLoginModal = () => setOpenLoginModal(true);
@@ -39,8 +22,8 @@ function App() {
   const handleCloseRegisterModal = () => { setOpenRegisterModal(false); setOpenLoginModal(false) };
 
   return (
-    <div className="App">
-      <ThemeProvider theme={theme}>
+    <div className="IntroPage">
+      <ThemeProvider theme={props.theme}>
         <CssBaseline />
         <Container >
           <Box className="basicBox">
@@ -86,4 +69,4 @@ function App() {
   )
 }
 
-export default App
+export default IntroPage

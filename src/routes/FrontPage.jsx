@@ -10,26 +10,28 @@ import {
     Typography,
     IconButton,
     Icon,
+    Divider,
 
 } from "@mui/material";
 import {
-    ChevronRight
+    ChevronLeft,
+    PeopleAltRounded
 } from '@mui/icons-material';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import styled from "@emotion/styled";
 
 
-const drawerWidth = 57;
+const drawerWidth = '15vw';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(0),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
-        marginLeft: `-${drawerWidth}px`,
+        marginLeft: `-${drawerWidth}`,
         ...(open && {
             transition: theme.transitions.create('margin', {
                 easing: theme.transitions.easing.easeOut,
@@ -48,8 +50,8 @@ const AppBarStyled = styled(MuiAppBar, {
         duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: `${drawerWidth}px`,
+        width: `calc(100vw - ${drawerWidth})`,
+        marginLeft: `${drawerWidth}`,
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.easeOut,
             duration: theme.transitions.duration.enteringScreen,
@@ -71,30 +73,51 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function FrontPage(props) {
     const [openDrawer, setOpenDrawer] = useState(true);
     const handleDrawerOpen = () => setOpenDrawer(true);
-    const handleDrawerClose = () => {setOpenDrawer(false); setTimeout(handleDrawerOpen, 5000);}
+    const handleDrawerClose = () => setOpenDrawer(false)
 
   return (
     <ThemeProvider theme={props.theme}>
         <CssBaseline />
-        <Container sx={{display: 'flex'}}>
+        <Container sx={{display: 'flex', marginLeft: '0px', marginRight: '0px'}}>
             <AppBarStyled position='fixed' open={openDrawer}>
-                <Typography>
-                    App bar
-                </Typography>
+                <Toolbar>
+                    <IconButton 
+                        mr='5'
+                        color='inherit' 
+                        onClick={handleDrawerOpen}
+                        sx={{ ...(openDrawer && { display: 'none' }) }}
+                    >
+                        <PeopleAltRounded color=""/>
+                    </IconButton>
+                    <Typography>
+                        App bar
+                    </Typography>    
+                </Toolbar>
+
             </AppBarStyled>
             <Drawer 
                 variant="persistent"
                 anchor="left"
                 open={openDrawer}
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                        width: drawerWidth,
+                        boxSizing: 'border-box',
+                    },}}
             >
                 <DrawerHeader>
+                    <Typography>Friends</Typography>
                     <IconButton onClick={handleDrawerClose}>
-                        <ChevronRight />
+                        <ChevronLeft />
                     </IconButton>
                 </DrawerHeader>
+                <Divider />
+                ple
 
             </Drawer>
-            <Main open={openDrawer}>
+            <Main open={openDrawer} sx={{alignSelf: 'center'}}>
                 <DrawerHeader />
                 <Typography paragraph>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

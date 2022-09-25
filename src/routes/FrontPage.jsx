@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import MuiAppBar from '@mui/material/AppBar';
 import { 
@@ -23,8 +23,9 @@ import styled from "@emotion/styled";
 
 import DrawerFriendElement from "../components/DrawerFriendElement";
 
-
-const drawerWidth = '15vw';
+// An easy hack to have the messages drawer larger on small screens
+// to be implemented correctly later
+const drawerWidth = window.innerWidth < 1000 ? '35vw' : '15vw';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({

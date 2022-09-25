@@ -15,8 +15,8 @@ export default function DrawerFriendElement(props) {
         <Stack direction='row' gap='10px' m='10px'>
           <Avatar />
           <Stack flexGrow='1'>
-            <Typography><b>NAME</b></Typography>
-            <Typography>msg tesdat</Typography>
+            <Typography noWrap='true'><b>NAME</b></Typography>
+            <Typography noWrap='true'>msg tesdaasdsadadast</Typography>
           </Stack>
         </Stack>
         <Divider />

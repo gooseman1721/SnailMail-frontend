@@ -18,7 +18,8 @@ import FrontPage from './routes/FrontPage';
 const theme = createTheme({
   palette: {
     primary: {
-      main: blueGrey[500]
+      main: blueGrey[500],
+      light: blueGrey[400]
     },
     secondary: {
       main: purple[200]

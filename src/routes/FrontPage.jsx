@@ -4,6 +4,7 @@ import MuiAppBar from '@mui/material/AppBar';
 import { 
     Container,
     Box,
+    Stack,
     AppBar,
     Toolbar,
     Drawer,
@@ -19,6 +20,8 @@ import {
 } from '@mui/icons-material';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import styled from "@emotion/styled";
+
+import DrawerFriendElement from "../components/DrawerFriendElement";
 
 
 const drawerWidth = '15vw';
@@ -108,13 +111,17 @@ export default function FrontPage(props) {
                     },}}
             >
                 <DrawerHeader>
-                    <Typography>Friends</Typography>
+                    <Typography variant='h5' flexGrow='1'>
+                        Messages
+                    </Typography>
                     <IconButton onClick={handleDrawerClose}>
                         <ChevronLeft />
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                ple
+                <Stack>
+                    <DrawerFriendElement theme={props.theme} />
+                </Stack>
 
             </Drawer>
             <Main open={openDrawer} sx={{alignSelf: 'center'}}>

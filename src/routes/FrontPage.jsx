@@ -22,6 +22,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import styled from "@emotion/styled";
 
 import DrawerFriendElement from "../components/DrawerFriendElement";
+import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
 
 // An easy hack to have the messages drawer larger on small screens
 // to be implemented correctly later
@@ -82,7 +83,13 @@ export default function FrontPage(props) {
   return (
     <ThemeProvider theme={props.theme}>
         <CssBaseline />
-        <Container sx={{display: 'flex', marginLeft: '0px', marginRight: '0px'}}>
+          <Container sx={{ 
+                            display: 'block', 
+                            marginLeft: `${drawerWidth}`, 
+                            marginRight: '10px',
+                            maxWidth: `calc(100vw - ${drawerWidth})`}}
+                     maxWidth='false'
+            >
             <AppBarStyled position='fixed' open={openDrawer}>
                 <Toolbar>
                     <IconButton 
@@ -127,20 +134,14 @@ export default function FrontPage(props) {
             </Drawer>
             <Main open={openDrawer} sx={{alignSelf: 'center'}}>
                 <DrawerHeader />
-                <Typography paragraph>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-                      enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-                      imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-                      Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-                      Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                      adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-                      nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-                      leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-                      feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-                      consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-                      sapien faucibus et molestie ac.
-                </Typography>
+                <Stack direction='row' flexWrap='wrap'>
+                    <FrontPageChatRoomCard />
+                    <FrontPageChatRoomCard />
+                    <FrontPageChatRoomCard />
+                    <FrontPageChatRoomCard />
+                    <FrontPageChatRoomCard />
+                </Stack>
+
             </Main>
         </Container>
     </ThemeProvider>

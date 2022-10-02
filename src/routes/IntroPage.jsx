@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -22,6 +22,25 @@ function IntroPage(props) {
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
   const handleOpenRegisterModal = () => setOpenRegisterModal(true);
   const handleCloseRegisterModal = () => { setOpenRegisterModal(false); setOpenLoginModal(false) };
+
+  const [backendResponse, setBackendResponse] = useState(null);
+
+  const baseURL = "http://127.0.0.1:8000";
+
+  function fetch_func() {
+    fetch("http://127.0.0.1:8000/ping/", {
+      mode: 'cors'
+    })
+      .then((response) => response.json())
+      .then((data) => setBackendResponse(data.response_text));
+    setTimeout(fetch_func, 1000)
+  }
+
+  useEffect(() => {
+    fetch_func()
+  }, [])
+
+
 
   return (
     <div className="IntroPage">
@@ -57,6 +76,9 @@ function IntroPage(props) {
           <Box sx={{py: "1vw"}}>
             <Typography variant='h2'>
               A demo here?
+            </Typography>
+            <Typography variant='h5'>
+              Backend response: {backendResponse}
             </Typography>
           </Box>
           <LoginModal open={openLoginModal} close={handleCloseLoginModal} openRegisterModal={handleOpenRegisterModal} />

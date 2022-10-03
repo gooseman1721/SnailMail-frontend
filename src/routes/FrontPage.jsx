@@ -1,24 +1,20 @@
 import { useState, useEffect } from "react";
 
-import MuiAppBar from '@mui/material/AppBar';
-import { 
-    Container,
-    Box,
-    Stack,
-    AppBar,
-    Toolbar,
-    Drawer,
-    Typography,
-    IconButton,
-    Icon,
-    Divider,
-
-} from "@mui/material";
+import MuiAppBar from "@mui/material/AppBar";
 import {
-    ChevronLeft,
-    PeopleAltRounded
-} from '@mui/icons-material';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+  Container,
+  Box,
+  Stack,
+  AppBar,
+  Toolbar,
+  Drawer,
+  Typography,
+  IconButton,
+  Icon,
+  Divider,
+} from "@mui/material";
+import { ChevronLeft, PeopleAltRounded } from "@mui/icons-material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import styled from "@emotion/styled";
 
 import DrawerFriendElement from "../components/DrawerFriendElement";
@@ -26,124 +22,120 @@ import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
 
 // An easy hack to have the messages drawer larger on small screens
 // to be implemented correctly later
-const drawerWidth = window.innerWidth < 1000 ? '35vw' : '15vw';
+const drawerWidth = window.innerWidth < 1000 ? "35vw" : "15vw";
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(0),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginLeft: `-${drawerWidth}`,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginLeft: 0,
-        }),
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+  ({ theme, open }) => ({
+    flexGrow: 1,
+    padding: theme.spacing(0),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
     }),
+    marginLeft: `-${drawerWidth}`,
+    ...(open && {
+      transition: theme.transitions.create("margin", {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      marginLeft: 0,
+    }),
+  })
 );
 
 const AppBarStyled = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+  transition: theme.transitions.create(["margin", "width"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    width: `calc(100vw - ${drawerWidth})`,
+    marginLeft: `${drawerWidth}`,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
     }),
-    ...(open && {
-        width: `calc(100vw - ${drawerWidth})`,
-        marginLeft: `${drawerWidth}`,
-        transition: theme.transitions.create(['margin', 'width'], {
-            easing: theme.transitions.easing.easeOut,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
+  }),
 }));
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: "flex-end",
 }));
-
-
 
 export default function FrontPage(props) {
-    const [openDrawer, setOpenDrawer] = useState(true);
-    const handleDrawerOpen = () => setOpenDrawer(true);
-    const handleDrawerClose = () => setOpenDrawer(false)
+  const [openDrawer, setOpenDrawer] = useState(true);
+  const handleDrawerOpen = () => setOpenDrawer(true);
+  const handleDrawerClose = () => setOpenDrawer(false);
 
   return (
     <ThemeProvider theme={props.theme}>
-        <CssBaseline />
-          <Container sx={{ 
-                            display: 'block', 
-                            marginLeft: `${drawerWidth}`, 
-                            marginRight: '10px',
-                            maxWidth: `calc(100vw - ${drawerWidth})`}}
-                     maxWidth='false'
+      <CssBaseline />
+      <Container
+        sx={{
+          display: "block",
+          marginLeft: `${drawerWidth}`,
+          marginRight: "10px",
+          maxWidth: `calc(100vw - ${drawerWidth})`,
+        }}
+        maxWidth="false"
+      >
+        <AppBarStyled position="fixed" open={openDrawer}>
+          <Toolbar>
+            <IconButton
+              mr="5"
+              color="inherit"
+              onClick={handleDrawerOpen}
+              sx={{ ...(openDrawer && { display: "none" }) }}
             >
-            <AppBarStyled position='fixed' open={openDrawer}>
-                <Toolbar>
-                    <IconButton 
-                        mr='5'
-                        color='inherit' 
-                        onClick={handleDrawerOpen}
-                        sx={{ ...(openDrawer && { display: 'none' }) }}
-                    >
-                        <PeopleAltRounded color=""/>
-                    </IconButton>
-                    <Typography>
-                        App bar
-                    </Typography>    
-                </Toolbar>
-
-            </AppBarStyled>
-            <Drawer 
-                variant="persistent"
-                anchor="left"
-                open={openDrawer}
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },}}
-            >
-                <DrawerHeader>
-                    <Typography variant='h5' flexGrow='1'>
-                        Messages
-                    </Typography>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeft />
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <Stack>
-                    <DrawerFriendElement theme={props.theme} />
-                </Stack>
-
-            </Drawer>
-            <Main open={openDrawer} sx={{alignSelf: 'center'}}>
-                <DrawerHeader />
-                <Stack direction='row' flexWrap='wrap'>
-                    <FrontPageChatRoomCard />
-                    <FrontPageChatRoomCard />
-                    <FrontPageChatRoomCard />
-                    <FrontPageChatRoomCard />
-                    <FrontPageChatRoomCard />
-                </Stack>
-
-            </Main>
-        </Container>
+              <PeopleAltRounded color="" />
+            </IconButton>
+            <Typography>App bar</Typography>
+          </Toolbar>
+        </AppBarStyled>
+        <Drawer
+          variant="persistent"
+          anchor="left"
+          open={openDrawer}
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+        >
+          <DrawerHeader>
+            <Typography variant="h5" flexGrow="1">
+              Messages
+            </Typography>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeft />
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <Stack>
+            <DrawerFriendElement theme={props.theme} />
+          </Stack>
+        </Drawer>
+        <Main open={openDrawer} sx={{ alignSelf: "center" }}>
+          <DrawerHeader />
+          <Stack direction="row" flexWrap="wrap">
+            <FrontPageChatRoomCard />
+            <FrontPageChatRoomCard />
+            <FrontPageChatRoomCard />
+            <FrontPageChatRoomCard />
+            <FrontPageChatRoomCard />
+          </Stack>
+        </Main>
+      </Container>
     </ThemeProvider>
-  )
+  );
 }

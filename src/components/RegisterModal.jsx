@@ -6,16 +6,16 @@ import { Stack } from "@mui/material";
 import Button from "@mui/material/Button";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '400',
-  bgcolor: 'background.paper',
-  border: '2px solid rgba(88, 121, 126, 0.205)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "400",
+  bgcolor: "background.paper",
+  border: "2px solid rgba(88, 121, 126, 0.205)",
   boxShadow: 24,
   p: 4,
-  borderRadius: '2%',
+  borderRadius: "2%",
 };
 
 export default function RegisterModal(props) {
@@ -24,17 +24,32 @@ export default function RegisterModal(props) {
       <Modal
         open={props.open}
         onClose={props.close}
-        BackdropProps={{ style: { backgroundColor: "transparent"}}}
+        BackdropProps={{ style: { backgroundColor: "transparent" } }}
       >
         <Box sx={style}>
-          <Stack gap='1em'>
-            <Typography variant="h6" mb='0.5em'>
+          <Stack gap="1em">
+            <Typography variant="h6" mb="0.5em">
               Create an account
             </Typography>
-            <TextField variant="outlined" label='Username'></TextField>
-            <TextField variant="outlined" label='Password' type='password' autoComplete="current-password"></TextField>
-            <TextField variant="outlined" label="Repeat password" type='password' autoComplete='current-password'></TextField>
-            <Stack mt='1em' direction='row' justifyContent='flex-center' gap='1em'>
+            <TextField variant="outlined" label="Username"></TextField>
+            <TextField
+              variant="outlined"
+              label="Password"
+              type="password"
+              autoComplete="current-password"
+            ></TextField>
+            <TextField
+              variant="outlined"
+              label="Repeat password"
+              type="password"
+              autoComplete="current-password"
+            ></TextField>
+            <Stack
+              mt="1em"
+              direction="row"
+              justifyContent="flex-center"
+              gap="1em"
+            >
               <Button variant="contained">Register</Button>
               <Button variant="outlined">Guest Account</Button>
             </Stack>
@@ -42,5 +57,5 @@ export default function RegisterModal(props) {
         </Box>
       </Modal>
     </div>
-  )
+  );
 }

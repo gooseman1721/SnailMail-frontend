@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import {
+  useFiefAuth,
+  useFiefIsAuthenticated,
+  useFiefUserinfo,
+} from "@fief/fief/react";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -11,6 +16,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 import RegisterModal from "../components/RegisterModal";
+import { useCallback } from "react";
 
 function IntroPage(props) {
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -26,20 +32,34 @@ function IntroPage(props) {
 
   const [backendResponse, setBackendResponse] = useState(null);
 
-  const baseURL = "http://127.0.0.1:8000";
+  const fiefAuth = useFiefAuth();
+  const isAuthenticated = useFiefIsAuthenticated();
+  const userinfo = useFiefUserinfo();
 
-  function fetch_func() {
-    fetch("http://127.0.0.1:8000/ping/", {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((data) => setBackendResponse(data.response_text));
-    setTimeout(fetch_func, 1000);
-  }
+  const login = useCallback(() => {
+    fiefAuth.redirectToLogin(
+      `${window.location.protocol}//${window.location.host}/callback`
+    );
+  }, [fiefAuth]);
 
-  useEffect(() => {
-    fetch_func();
-  }, []);
+  const logout = useCallback(() => {
+    fiefAuth.logout(`${window.location.protocol}//${window.location.host}`);
+  }, [fiefAuth]);
+
+  // const baseURL = "http://127.0.0.1:8000";
+
+  // function fetch_func() {
+  //   fetch("http://127.0.0.1:8000/ping/", {
+  //     mode: "cors",
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => setBackendResponse(data.response_text));
+  //   setTimeout(fetch_func, 1000);
+  // }
+
+  // useEffect(() => {
+  //   fetch_func();
+  // }, []);
 
   return (
     <div className="IntroPage">
@@ -47,17 +67,49 @@ function IntroPage(props) {
         <CssBaseline />
         <Container>
           <Box className="basicBox">
-            <Stack justifyContent={"flex-end"} spacing={"5vw"} direction="row">
+            <Stack justifyContent={"flex-end"} spacing={"2vw"} direction="row">
               <Typography variant="h1" sx={{ flexGrow: 1 }}>
                 SnailMail
               </Typography>
+              {!isAuthenticated && (
+                <Button
+                  variant="contained"
+                  sx={{ alignSelf: "center" }}
+                  onClick={() => login()}
+                >
+                  Login
+                </Button>
+              )}
+              {isAuthenticated && userinfo && (
+                <Button
+                  variant="contained"
+                  sx={{ alignSelf: "center" }}
+                  onClick={() => logout()}
+                >
+                  Logout mr {userinfo.email}
+                </Button>
+              )}
+              {/* <Button
+                variant="outlined"
+                sx={{ alignSelf: "center" }}
+                onClick={() => loginWithRedirect()}
+              >
+                Fief login
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{ alignSelf: "center" }}
+                onClick={() => logout()}
+              >
+                Fief logout
+              </Button>
               <Button
                 variant="contained"
                 sx={{ alignSelf: "center" }}
                 onClick={handleOpenLoginModal}
               >
                 Sign in
-              </Button>
+              </Button> */}
             </Stack>
           </Box>
           <Box sx={{ py: "3vw" }}>

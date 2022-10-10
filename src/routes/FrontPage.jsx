@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
 
+import {
+  useFiefAuth,
+  useFiefIsAuthenticated,
+  useFiefUserinfo,
+} from "@fief/fief/react";
+
 import MuiAppBar from "@mui/material/AppBar";
 import {
   Container,
@@ -74,6 +80,18 @@ export default function FrontPage(props) {
   const handleDrawerOpen = () => setOpenDrawer(true);
   const handleDrawerClose = () => setOpenDrawer(false);
 
+  // sessionStorage.setItem("test", "session storage test");
+
+  const fiefAuth = useFiefAuth();
+  // const isAuthenticated = useFiefIsAuthenticated();
+  // const userinfo = useFiefUserinfo();
+  const isAuthenticated = useFiefIsAuthenticated();
+  const userinfo = useFiefUserinfo();
+  const tokeninfo = JSON.stringify(fiefAuth.storage);
+  console.log(tokeninfo);
+  console.log(userinfo);
+  // console.log(sessionStorage.getItem("test"));
+
   return (
     <ThemeProvider theme={props.theme}>
       <CssBaseline />
@@ -96,7 +114,7 @@ export default function FrontPage(props) {
             >
               <PeopleAltRounded color="" />
             </IconButton>
-            <Typography>App bar</Typography>
+            <Typography>App bar {String(tokeninfo)}</Typography>
           </Toolbar>
         </AppBarStyled>
         <Drawer

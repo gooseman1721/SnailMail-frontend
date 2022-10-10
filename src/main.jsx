@@ -13,7 +13,6 @@ import FiefCallback from "./routes/FiefCallback";
 import { createTheme } from "@mui/material";
 import { blueGrey, grey, lightBlue, purple } from "@mui/material/colors";
 
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -43,17 +42,19 @@ const router = createBrowserRouter([
   {
     path: "callback/",
     element: <FiefCallback />,
-    errorElement: <BasicErrorPage theme={theme} />
-  }
+    errorElement: <BasicErrorPage theme={theme} />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <FiefAuthProvider
-      baseURL="http://localhost:9000"
-      clientId="UtCBLTf_dnoShrys8WWnXuTgKq_L6Kjjj-if7CcmXno"
-    >
-      <RouterProvider router={router} />
-    </FiefAuthProvider>
-  </React.StrictMode>
+  // React StrictMode renders twice, causing two
+  // fief POST requests
+  // <React.StrictMode>
+  <FiefAuthProvider
+    baseURL="http://localhost:9000"
+    clientId="UtCBLTf_dnoShrys8WWnXuTgKq_L6Kjjj-if7CcmXno"
+  >
+    <RouterProvider router={router} />
+  </FiefAuthProvider>
+  // </React.StrictMode>
 );

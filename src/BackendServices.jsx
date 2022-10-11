@@ -24,11 +24,10 @@ async function get_fief_user(url = "", access_token) {
     method: "GET",
     mode: "cors",
     headers: {
-      Authorization: `Bearer ${access_token}`
-    }
+      Authorization: `Bearer ${access_token}`,
+    },
   });
   return response.json();
 }
 
-export {backendBaseUrl, get_fief_user};
-
+export { backendBaseUrl, get_fief_user };

@@ -53,9 +53,9 @@ function IntroPage(props) {
 
   // This just prints user's token
   function get_user_info() {
-    console.log(
-      JSON.stringify(get_fief_user(backendBaseUrl, tokenResponse.access_token))
-    );
+    get_fief_user(backendBaseUrl, tokenResponse.access_token).then((data) => {
+      console.log(data);
+    });
   }
 
   return (

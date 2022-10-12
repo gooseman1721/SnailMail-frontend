@@ -9,6 +9,7 @@ import IntroPage from "./routes/IntroPage";
 import FrontPage from "./routes/FrontPage";
 import BasicErrorPage from "./routes/BasicErrorPage";
 import FiefCallback from "./routes/FiefCallback";
+import RequireAuth from "./components/RequireAuth";
 
 import { createTheme } from "@mui/material";
 import { blueGrey, grey, lightBlue, purple } from "@mui/material/colors";
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
   },
   {
     path: "main/",
-    element: <FrontPage theme={theme} />,
+    element: (
+      <RequireAuth>
+        <FrontPage theme={theme} />
+      </RequireAuth>
+    ),
     errorElement: <BasicErrorPage theme={theme} />,
   },
   {

@@ -34,12 +34,9 @@ function IntroPage(props) {
   const [backendResponse, setBackendResponse] = useState(null);
 
   const fiefAuth = useFiefAuth();
-  const storage = fiefAuth.storage;
   const isAuthenticated = useFiefIsAuthenticated();
   const userinfo = useFiefUserinfo();
   const tokenResponse = useFiefTokenInfo(); //This is the way to get user's token
-
-  const local_storage = localStorage;
 
   const login = useCallback(() => {
     fiefAuth.redirectToLogin(

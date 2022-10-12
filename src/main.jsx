@@ -1,15 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { FiefAuthProvider } from "@fief/fief/react";
 
 import "./index.css";
 import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
 
 import IntroPage from "./routes/IntroPage";
+import FrontPage from "./routes/FrontPage";
 import BasicErrorPage from "./routes/BasicErrorPage";
+import FiefCallback from "./routes/FiefCallback";
+import RequireAuth from "./components/RequireAuth";
 
 import { createTheme } from "@mui/material";
 import { blueGrey, grey, lightBlue, purple } from "@mui/material/colors";
-import FrontPage from "./routes/FrontPage";
 
 const theme = createTheme({
   palette: {
@@ -34,32 +37,29 @@ const router = createBrowserRouter([
   },
   {
     path: "main/",
-    element: <FrontPage theme={theme} />,
+    element: (
+      <RequireAuth>
+        <FrontPage theme={theme} />
+      </RequireAuth>
+    ),
+    errorElement: <BasicErrorPage theme={theme} />,
+  },
+  {
+    path: "callback/",
+    element: <FiefCallback />,
     errorElement: <BasicErrorPage theme={theme} />,
   },
 ]);
 
-const backendBaseUrl = "http://127.0.0.1:8000";
-
-async function postLoginRequest(url = "", data = {}) {
-  const response = await fetch(url, {
-    method: "POST",
-    mode: "cors",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-
-    body: new URLSearchParams({
-      username: data.username,
-      password: data.password,
-    }),
-  });
-  return response.json();
-}
-
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // React StrictMode renders twice, causing two
+  // fief POST requests
+  // <React.StrictMode>
+  <FiefAuthProvider
+    baseURL="http://localhost:9000"
+    clientId="UtCBLTf_dnoShrys8WWnXuTgKq_L6Kjjj-if7CcmXno"
+  >
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </FiefAuthProvider>
+  // </React.StrictMode>
 );

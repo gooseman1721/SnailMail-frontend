@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
 
+import {
+  useFiefAuth,
+  useFiefIsAuthenticated,
+  useFiefUserinfo,
+  useFiefTokenInfo,
+} from "@fief/fief/react";
+
 import MuiAppBar from "@mui/material/AppBar";
 import {
   Container,
@@ -19,6 +26,8 @@ import styled from "@emotion/styled";
 
 import DrawerFriendElement from "../components/DrawerFriendElement";
 import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
+
+import { backendBaseUrl, get_data_after_user_login } from "../BackendServices";
 
 // An easy hack to have the messages drawer larger on small screens
 // to be implemented correctly later
@@ -74,6 +83,17 @@ export default function FrontPage(props) {
   const handleDrawerOpen = () => setOpenDrawer(true);
   const handleDrawerClose = () => setOpenDrawer(false);
 
+  const tokenResponse = useFiefTokenInfo();
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    get_data_after_user_login(backendBaseUrl, tokenResponse.access_token).then(
+      (data) => setUserData(data)
+    );
+  }, []);
+
+  // console.log(sessionStorage.getItem("test"));
+
   return (
     <ThemeProvider theme={props.theme}>
       <CssBaseline />
@@ -96,7 +116,7 @@ export default function FrontPage(props) {
             >
               <PeopleAltRounded color="" />
             </IconButton>
-            <Typography>App bar</Typography>
+            <Typography>App bar {String(JSON.stringify(userData))}</Typography>
           </Toolbar>
         </AppBarStyled>
         <Drawer

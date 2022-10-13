@@ -27,7 +27,7 @@ import styled from "@emotion/styled";
 import DrawerFriendElement from "../components/DrawerFriendElement";
 import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
 
-import { backendBaseUrl, get_data_after_user_login } from "../BackendServices";
+import { backendBaseUrl, get_data_after_user_login } from "../APIServices";
 
 // An easy hack to have the messages drawer larger on small screens
 // to be implemented correctly later
@@ -92,7 +92,6 @@ export default function FrontPage(props) {
     );
   }, []);
 
-  // console.log(sessionStorage.getItem("test"));
 
   return (
     <ThemeProvider theme={props.theme}>

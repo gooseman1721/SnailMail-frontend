@@ -6,6 +6,8 @@ import {
   useFiefTokenInfo,
 } from "@fief/fief/react";
 
+import { useQuery } from "@tanstack/react-query";
+
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -17,7 +19,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 import RegisterModal from "../components/RegisterModal";
-import { backendBaseUrl, get_fief_user } from "../BackendServices.jsx";
+import { backendBaseUrl, get_fief_user, get_fief_user_react_fetch } from "../APIServices.jsx";
+import LoadBasicUserData from "../queries/LoadBasicUserData";
 
 function IntroPage(props) {
   const [openLoginModal, setOpenLoginModal] = useState(false);
@@ -55,6 +58,7 @@ function IntroPage(props) {
     });
   }
 
+
   return (
     <div className="IntroPage">
       <ThemeProvider theme={props.theme}>
@@ -80,7 +84,7 @@ function IntroPage(props) {
                   sx={{ alignSelf: "center" }}
                   onClick={() => logout()}
                 >
-                  Logout mr {userinfo.email}
+                  Logout mr {userinfo.fields.username}
                 </Button>
               )}
               {/* <Button
@@ -143,6 +147,9 @@ function IntroPage(props) {
             <Button variant="outlined" onClick={get_user_info}>
               Get user info
             </Button>
+            {isAuthenticated && (
+              <LoadBasicUserData accessToken={tokenResponse.access_token} />
+            )}
           </Box>
           <LoginModal
             open={openLoginModal}

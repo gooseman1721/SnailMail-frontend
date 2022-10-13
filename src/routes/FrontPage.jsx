@@ -19,6 +19,7 @@ import {
   IconButton,
   Icon,
   Divider,
+  Autocomplete
 } from "@mui/material";
 import { ChevronLeft, PeopleAltRounded } from "@mui/icons-material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -26,6 +27,7 @@ import styled from "@emotion/styled";
 
 import DrawerFriendElement from "../components/DrawerFriendElement";
 import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
+import FriendSearchBox from "../components/FriendSearchBox";
 
 import { backendBaseUrl, get_data_after_user_login } from "../APIServices";
 
@@ -139,6 +141,7 @@ export default function FrontPage(props) {
               <ChevronLeft />
             </IconButton>
           </DrawerHeader>
+          <FriendSearchBox />
           <Divider />
           <Stack>
             <DrawerFriendElement theme={props.theme} />

@@ -7,6 +7,8 @@ import {
   useFiefTokenInfo,
 } from "@fief/fief/react";
 
+import { Link as RouterLink } from "react-router-dom";
+
 import MuiAppBar from "@mui/material/AppBar";
 import {
   Container,
@@ -19,7 +21,8 @@ import {
   IconButton,
   Icon,
   Divider,
-  Autocomplete
+  Autocomplete,
+  Button
 } from "@mui/material";
 import { ChevronLeft, PeopleAltRounded } from "@mui/icons-material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -140,6 +143,13 @@ export default function FrontPage(props) {
               <ChevronLeft />
             </IconButton>
           </DrawerHeader>
+          <Button
+            sx={{ marginRight: "7.5vw" }}
+            component={RouterLink}
+            to={"friends/"}
+          >
+            Manage friends
+          </Button>
           <Divider />
           <Stack>
             <DrawerFriendElement theme={props.theme} />
@@ -148,11 +158,11 @@ export default function FrontPage(props) {
         <Main open={openDrawer} sx={{ alignSelf: "center" }}>
           <DrawerHeader />
           <Stack direction="row" flexWrap="wrap">
-            <FrontPageChatRoomCard />
-            <FrontPageChatRoomCard />
-            <FrontPageChatRoomCard />
-            <FrontPageChatRoomCard />
-            <FrontPageChatRoomCard />
+            <FrontPageChatRoomCard theme={props.theme} />
+            <FrontPageChatRoomCard theme={props.theme} />
+            <FrontPageChatRoomCard theme={props.theme} />
+            <FrontPageChatRoomCard theme={props.theme} />
+            <FrontPageChatRoomCard theme={props.theme} />
           </Stack>
         </Main>
       </Container>

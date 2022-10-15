@@ -52,4 +52,21 @@ async function get_data_after_user_login(url = "", access_token) {
   return response.json();
 }
 
-export { backendBaseUrl, get_fief_user, get_data_after_user_login, get_fief_user_react_fetch };
+async function get_user_friends(url = "", access_token) {
+  const response = await fetch(url + "/user/friends/", {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+  return response.json();
+}
+
+export {
+  backendBaseUrl,
+  get_fief_user,
+  get_data_after_user_login,
+  get_fief_user_react_fetch,
+  get_user_friends,
+};

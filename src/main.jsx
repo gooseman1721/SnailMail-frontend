@@ -11,6 +11,7 @@ import IntroPage from "./routes/IntroPage";
 import FrontPage from "./routes/FrontPage";
 import BasicErrorPage from "./routes/BasicErrorPage";
 import FiefCallback from "./routes/FiefCallback";
+import ManageFriendsPage from "./routes/ManageFriendsPage";
 import RequireAuth from "./components/RequireAuth";
 
 import { createTheme } from "@mui/material";
@@ -52,6 +53,15 @@ const router = createBrowserRouter([
     path: "callback/",
     element: <FiefCallback />,
     errorElement: <BasicErrorPage theme={theme} />,
+  },
+  {
+    path: "main/friends/",
+    element: (
+      <RequireAuth>
+        <ManageFriendsPage theme={theme} />
+      </RequireAuth>
+    ),
+    errorElement: <BasicErrorPage />,
   },
 ]);
 

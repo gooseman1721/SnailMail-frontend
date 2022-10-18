@@ -1,12 +1,12 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { backendBaseUrl, get_user_friends } from "../APIServices";
+import { backendBaseUrl, get_friends_to_display } from "../APIServices";
 
-export default function GetUserFriends(props) {
+export default function GetProposedFriends(props) {
   const { isLoading, isError, data, error } = useQuery(
-    ["get_user_friends"],
-    () => get_user_friends(backendBaseUrl, props.accessToken)
+    ["get_proposed_friends"],
+    () => get_friends_to_display(backendBaseUrl, props.accessToken)
   );
 
   if (isLoading) {

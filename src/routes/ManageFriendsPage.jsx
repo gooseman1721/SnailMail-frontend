@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom"
 import { useFiefTokenInfo } from "@fief/fief/react";
 
 import GetUserFriends from "../queries/GetUserFriends";
+import GetProposedFriends from "../queries/GetProposedFriends";
 
 
 export default function ManageFriendsPage(props) {
@@ -41,6 +42,7 @@ export default function ManageFriendsPage(props) {
             <Typography variant="h4" flexGrow="1">
               Add friends
             </Typography>
+            <GetProposedFriends accessToken={tokenResponse.access_token} />
           </Stack>
         </Stack>
       </Container>

@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { backendBaseUrl, get_user_friends } from "../APIServices";
+import FriendElement from "../components/FriendElement";
 
 export default function GetUserFriends(props) {
   const { isLoading, isError, data, error } = useQuery(
@@ -19,9 +20,13 @@ export default function GetUserFriends(props) {
 
   const userList = data.map((userElement) => {
     return (
-      <li key={userElement.id.toString()}>{JSON.stringify(userElement)}</li>
+      <FriendElement
+        key={userElement.id.toString()}
+        userName={userElement.user_name.toString()}
+      ></FriendElement>
+      // <li key={userElement.id.toString()}>{JSON.stringify(userElement)}</li>
     );
   });
 
-  return <ul>{userList}</ul>;
+  return <>{userList}</>;
 }

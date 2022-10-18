@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { backendBaseUrl, get_friends_to_display } from "../APIServices";
 
+import FriendElement from "../components/FriendElement";
+
 export default function GetProposedFriends(props) {
   const { isLoading, isError, data, error } = useQuery(
     ["get_proposed_friends"],
@@ -19,9 +21,12 @@ export default function GetProposedFriends(props) {
 
   const userList = data.map((userElement) => {
     return (
-      <li key={userElement.id.toString()}>{JSON.stringify(userElement)}</li>
+      <FriendElement
+        key={userElement.id.toString()}
+        userName={userElement.user_name.toString()}
+      ></FriendElement>
     );
   });
 
-  return <ul>{userList}</ul>;
+  return <>{userList}</>;
 }

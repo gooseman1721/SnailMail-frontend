@@ -6,40 +6,58 @@ import {
   Container,
   Button,
   Stack,
-  Divider
+  Divider,
 } from "@mui/material";
 
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { useFiefTokenInfo } from "@fief/fief/react";
 
 import GetUserFriends from "../queries/GetUserFriends";
 import GetProposedFriends from "../queries/GetProposedFriends";
 
-
 export default function ManageFriendsPage(props) {
-    const navigate = useNavigate();
-    const tokenResponse = useFiefTokenInfo();
+  const navigate = useNavigate();
+  const tokenResponse = useFiefTokenInfo();
   return (
     <ThemeProvider theme={props.theme}>
       <CssBaseline />
       <Container>
-        <Stack direction="row" spacing="2vw" justifyContent={"flex-end"} margin="1vw">
+        <Stack
+          direction="row"
+          spacing="2vw"
+          justifyContent={"flex-end"}
+          margin="1vw"
+        >
           <Typography variant="h2" flexGrow="1">
             Manage friends page
           </Typography>
           <Button onClick={() => navigate(-1)}>Back</Button>
         </Stack>
         <Divider />
-        <Stack direction="row" spacing="2vw" justifyContent="space-evenly" marginTop="1vw">
+        <Stack
+          direction="row"
+          spacing="2vw"
+          justifyContent="space-evenly"
+          marginTop="3vh"
+        >
           <Stack>
-            <Typography variant="h4" flexGrow="1">
+            <Typography
+              variant="h4"
+              flexGrow="0"
+              marginBottom="20px"
+              sx={{ alignSelf: "center" }}
+            >
               Your friends
             </Typography>
             <GetUserFriends accessToken={tokenResponse.access_token} />
-
           </Stack>
           <Stack>
-            <Typography variant="h4" flexGrow="1">
+            <Typography
+              variant="h4"
+              flexGrow="0"
+              marginBottom="20px"
+              sx={{ alignSelf: "center" }}
+            >
               Add friends
             </Typography>
             <GetProposedFriends accessToken={tokenResponse.access_token} />

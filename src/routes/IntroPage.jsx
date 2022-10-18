@@ -84,7 +84,7 @@ function IntroPage(props) {
                   sx={{ alignSelf: "center" }}
                   onClick={() => logout()}
                 >
-                  Logout mr {userinfo.fields.username}
+                  Logout {userinfo.fields.username}
                 </Button>
               )}
               {/* <Button
@@ -111,18 +111,12 @@ function IntroPage(props) {
             </Stack>
           </Box>
           <Box sx={{ py: "3vw" }}>
-            <Stack>
+            <Stack marginTop="20vh">
               <Typography variant="h6" sx={{ alignSelf: "center" }}>
                 Enter the world.. of SnailMail
               </Typography>
               <Typography sx={{ alignSelf: "center" }}>
-                Snailmail is plepleplpe and Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Proin ante libero, aliquam nec
-                risus sed, placerat sodales nisl. Mauris scelerisque venenatis
-                commodo. Donec ut nunc ex. Donec non ultrices erat, vel
-                porttitor metus. Aenean gravida, nisi in viverra convallis, nibh
-                lorem rhoncus diam, quis luctus lectus sem nec eros. Nunc vitae
-                tellus urna. Sed id eleifend sapien.
+                SnailMail is a chat application where you can chat with your friends 
               </Typography>
               <Stack
                 direction="row"
@@ -132,11 +126,11 @@ function IntroPage(props) {
                 <Button variant="contained" component={RouterLink} to="main/">
                   ENTER
                 </Button>
-                <Button variant="outlined">SOME OTHER OPTION</Button>
+                {/* <Button variant="outlined">SOME OTHER OPTION</Button> */}
               </Stack>
             </Stack>
           </Box>
-          <Box sx={{ py: "1vw" }}>
+          {/* <Box sx={{ py: "1vw" }}>
             <Typography variant="h2">A demo here?</Typography>
             <Typography variant="h5">
               Backend response: {backendResponse}
@@ -150,7 +144,7 @@ function IntroPage(props) {
             {isAuthenticated && (
               <LoadBasicUserData accessToken={tokenResponse.access_token} />
             )}
-          </Box>
+          </Box> */}
           <LoginModal
             open={openLoginModal}
             close={handleCloseLoginModal}

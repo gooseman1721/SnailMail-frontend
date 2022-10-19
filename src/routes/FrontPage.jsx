@@ -32,6 +32,7 @@ import DrawerFriendElement from "../components/DrawerFriendElement";
 import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
 
 import { backendBaseUrl, get_data_after_user_login } from "../APIServices";
+import GetUserFriendsDrawer from "../queries/GetUserFriendsDrawer";
 
 // An easy hack to have the messages drawer larger on small screens
 // to be implemented correctly later
@@ -152,7 +153,7 @@ export default function FrontPage(props) {
           </Button>
           <Divider />
           <Stack>
-            <DrawerFriendElement theme={props.theme} />
+            <GetUserFriendsDrawer accessToken={tokenResponse.access_token} />
           </Stack>
         </Drawer>
         <Main open={openDrawer} sx={{ alignSelf: "center" }}>

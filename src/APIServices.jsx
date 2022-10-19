@@ -74,6 +74,20 @@ async function get_friends_to_display(url = "", access_token) {
   return response.json();
 }
 
+async function send_friend_request(url = "", access_token, friend_id) {
+  const data = { id: friend_id };
+  const response = await fetch(url + `/user/friends/send_friend_request/`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return response.json();
+}
+
 export {
   backendBaseUrl,
   get_fief_user,
@@ -81,4 +95,5 @@ export {
   get_fief_user_react_fetch,
   get_user_friends,
   get_friends_to_display,
+  send_friend_request
 };

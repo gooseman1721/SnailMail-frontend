@@ -1,14 +1,13 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { backendBaseUrl, get_friends_to_display } from "../APIServices";
+import { backendBaseUrl, get_user_friends } from "../APIServices";
+import DrawerFriendElement from "../components/DrawerFriendElement";
 
-import FriendElement from "../components/FriendElement";
-
-export default function GetProposedFriends(props) {
+export default function GetUserFriendsDrawer(props) {
   const { isLoading, isError, data, error } = useQuery(
-    ["get_proposed_friends"],
-    () => get_friends_to_display(backendBaseUrl, props.accessToken)
+    ["get_user_friends"],
+    () => get_user_friends(backendBaseUrl, props.accessToken)
   );
 
   if (isLoading) {
@@ -21,13 +20,11 @@ export default function GetProposedFriends(props) {
 
   const userList = data.map((userElement) => {
     return (
-      <FriendElement
+      <DrawerFriendElement
         key={userElement.id.toString()}
         userName={userElement.user_name.toString()}
-        addFriend={true}
-        accessToken={props.accessToken}
-        userId={userElement.id}
-      ></FriendElement>
+      ></DrawerFriendElement>
+      // <li key={userElement.id.toString()}>{JSON.stringify(userElement)}</li>
     );
   });
 

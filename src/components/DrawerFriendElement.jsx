@@ -5,14 +5,16 @@ export default function DrawerFriendElement(props) {
   return (
     <ThemeProvider theme={props.theme}>
       <CssBaseline />
-      <Box>
+      <Box
+        sx={{ ":hover": { backgroundColor: "lightgray", cursor: "pointer" } }}
+      >
         <Stack direction="row" gap="10px" m="10px">
           <Avatar />
           <Stack flexGrow="1">
             <Typography noWrap={true}>
-              <b>NAME</b>
+              <b>{props.userName}</b>
             </Typography>
-            <Typography noWrap={true}>msg tesdaasdsadadast</Typography>
+            <Typography noWrap={true}>last message...</Typography>
           </Stack>
         </Stack>
         <Divider />

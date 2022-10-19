@@ -61,6 +61,15 @@ export default function ManageFriendsPage(props) {
               Add friends
             </Typography>
             <GetProposedFriends accessToken={tokenResponse.access_token} />
+            <Typography
+              variant="h4"
+              flexGrow="0"
+              marginTop="20px"
+              marginBottom="20px"
+              sx={{ alignSelf: "center" }}
+            >
+              Friend requests
+            </Typography>
           </Stack>
         </Stack>
       </Container>

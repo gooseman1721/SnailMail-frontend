@@ -11,6 +11,7 @@ import {
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 
 import SendFriendRequest from "../queries/SendFriendRequest";
+import AcceptFriendRequest from "../queries/AcceptFriendRequest";
 
 export default function FriendElement(props) {
   const [addFriendClicked, setAddFriendClicked] = useState(false);
@@ -35,15 +36,32 @@ export default function FriendElement(props) {
           </Stack>
           {props.addFriend && !addFriendClicked && (
             <Stack alignSelf="center">
-              <IconButton alignSelf="center" onClick={setAddFriendClickedTrue}>
+              <IconButton onClick={setAddFriendClickedTrue}>
                 <AddCircleOutlinedIcon />
               </IconButton>
             </Stack>
           )}
           {props.addFriend && addFriendClicked && (
             <Stack alignSelf="center">
-              <IconButton alignSelf="center">
+              <IconButton>
                 <SendFriendRequest
+                  accessToken={props.accessToken}
+                  userId={props.userId}
+                />
+              </IconButton>
+            </Stack>
+          )}
+          {props.acceptRequest && !addFriendClicked && (
+            <Stack alignSelf="center">
+              <IconButton onClick={setAddFriendClickedTrue}>
+                <AddCircleOutlinedIcon />
+              </IconButton>
+            </Stack>
+          )}
+          {props.acceptRequest && addFriendClicked && (
+            <Stack alignSelf="center">
+              <IconButton>
+                <AcceptFriendRequest
                   accessToken={props.accessToken}
                   userId={props.userId}
                 />

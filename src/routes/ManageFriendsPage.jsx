@@ -14,6 +14,7 @@ import { useFiefTokenInfo } from "@fief/fief/react";
 
 import GetUserFriends from "../queries/GetUserFriends";
 import GetProposedFriends from "../queries/GetProposedFriends";
+import GetFriendRequestsToUser from "../queries/GetFriendRequestsToUser";
 
 export default function ManageFriendsPage(props) {
   const navigate = useNavigate();
@@ -70,6 +71,7 @@ export default function ManageFriendsPage(props) {
             >
               Friend requests
             </Typography>
+            <GetFriendRequestsToUser accessToken={tokenResponse.access_token} />
           </Stack>
         </Stack>
       </Container>

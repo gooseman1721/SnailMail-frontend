@@ -16,6 +16,8 @@ import RequireAuth from "./components/RequireAuth";
 
 import { createTheme } from "@mui/material";
 import { blueGrey, grey, lightBlue, purple } from "@mui/material/colors";
+import FrontPageCards from "./routes/FrontPageCards";
+import ChatPage from "./routes/ChatPage";
 
 const theme = createTheme({
   palette: {
@@ -48,6 +50,24 @@ const router = createBrowserRouter([
       </RequireAuth>
     ),
     errorElement: <BasicErrorPage theme={theme} />,
+    children: [
+      {
+        index: true,
+        element: <FrontPageCards />
+      },
+      {
+        path: "chat/user/:userId",
+        element: <ChatPage />
+
+      },
+      {
+        path: "chat/room/:roomId"
+      },
+      {
+        path: "test/",
+        element: <FrontPageCards />,
+      }
+    ]
   },
   {
     path: "callback/",

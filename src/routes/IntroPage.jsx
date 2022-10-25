@@ -126,7 +126,7 @@ function IntroPage(props) {
                 <Button variant="contained" component={RouterLink} to="main/">
                   ENTER
                 </Button>
-                {/* <Button variant="outlined">SOME OTHER OPTION</Button> */}
+                <Button variant="outlined" component={RouterLink} to="main/test/">Enter Test</Button>
               </Stack>
             </Stack>
           </Box>

@@ -113,6 +113,18 @@ async function accept_friend_request(url = "", access_token, friend_id) {
   return response.json();
 }
 
+async function get_friend_message_data(url = "", access_token, friend_id) {
+  const response = await fetch(url + `/user/friends/${friend_id}/messages/`, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return response.json()
+}
+
 export {
   backendBaseUrl,
   get_fief_user,
@@ -122,5 +134,6 @@ export {
   get_friends_to_display,
   send_friend_request,
   get_friend_requests_to_user,
-  accept_friend_request
+  accept_friend_request,
+  get_friend_message_data,
 };

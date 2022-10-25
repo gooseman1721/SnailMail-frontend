@@ -23,6 +23,7 @@ export default function GetUserFriendsDrawer(props) {
       <DrawerFriendElement
         key={userElement.id.toString()}
         userName={userElement.user_name.toString()}
+        userId={userElement.id.toString()}
       ></DrawerFriendElement>
       // <li key={userElement.id.toString()}>{JSON.stringify(userElement)}</li>
     );

@@ -8,6 +8,7 @@ import {
 } from "@fief/fief/react";
 
 import { Link as RouterLink } from "react-router-dom";
+import { Outlet as RouterOutlet } from "react-router-dom";
 
 import MuiAppBar from "@mui/material/AppBar";
 import {
@@ -24,7 +25,7 @@ import {
   Autocomplete,
   Button
 } from "@mui/material";
-import { ChevronLeft, PeopleAltRounded } from "@mui/icons-material";
+import { ChevronLeft, Outlet, PeopleAltRounded } from "@mui/icons-material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import styled from "@emotion/styled";
 
@@ -158,13 +159,14 @@ export default function FrontPage(props) {
         </Drawer>
         <Main open={openDrawer} sx={{ alignSelf: "center" }}>
           <DrawerHeader />
-          <Stack direction="row" flexWrap="wrap">
+          <RouterOutlet />
+          {/* <Stack direction="row" flexWrap="wrap">
             <FrontPageChatRoomCard theme={props.theme} />
             <FrontPageChatRoomCard theme={props.theme} />
             <FrontPageChatRoomCard theme={props.theme} />
             <FrontPageChatRoomCard theme={props.theme} />
             <FrontPageChatRoomCard theme={props.theme} />
-          </Stack>
+          </Stack> */}
         </Main>
       </Container>
     </ThemeProvider>

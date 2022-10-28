@@ -22,7 +22,6 @@ export default function ChatPage() {
           <Typography variant="h4">Chatting with user {userId}</Typography>
         </Box>
         <Box sx={{ flexGrow: "1" }}>
-          Display messages box
           <FriendChatMessages accessToken={tokenResponse.access_token} friendId={parseInt(userId)}/>
         </Box>
         <Box>

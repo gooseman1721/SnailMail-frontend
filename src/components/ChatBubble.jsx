@@ -1,23 +1,45 @@
 import React from "react";
 
+import { Box, Typography, Stack } from "@mui/material";
+
 export default function ChatBubble(props) {
   if (props.fromFriend) {
     return (
-      <>
-        <b>
-          <p>Friend message content: {props.messageContent}</p>
-          <p>sent at: {props.messageCreatedDatetime} </p>
-        </b>
-      </>
+      <Box
+        bgcolor={"#e2e4f3"}
+        sx={{
+          maxWidth: "45%",
+          marginRight: "auto",
+          borderRadius: "5px",
+          marginY: "10px",
+        }}
+      >
+        <Stack>
+          <Typography>
+            Friend: <b>{props.messageContent} </b>
+          </Typography>
+          <Typography>sent at: {props.messageCreatedDatetime}</Typography>
+        </Stack>
+      </Box>
     );
   }
 
   return (
-    <>
-      <b>
-        <p>My message content: {props.messageContent}</p>
-        <p>sent at: {props.messageCreatedDatetime} </p>
-      </b>
-    </>
+    <Box
+      bgcolor={"#67add0"}
+      sx={{
+        maxWidth: "45%",
+        marginLeft: "auto",
+        borderRadius: "5px",
+        marginY: "10px",
+      }}
+    >
+      <Stack>
+        <Typography>
+          Me: <b>{props.messageContent} </b>
+        </Typography>
+        <Typography>sent at: {props.messageCreatedDatetime}</Typography>
+      </Stack>
+    </Box>
   );
 }

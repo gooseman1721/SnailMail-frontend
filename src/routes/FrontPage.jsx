@@ -121,7 +121,8 @@ export default function FrontPage(props) {
             >
               <PeopleAltRounded color="" />
             </IconButton>
-            <Typography>App bar {String(JSON.stringify(userData))}</Typography>
+            {/* <Typography>App bar {String(JSON.stringify(userData))}</Typography> */}
+            <Typography>App bar</Typography>
           </Toolbar>
         </AppBarStyled>
         <Drawer

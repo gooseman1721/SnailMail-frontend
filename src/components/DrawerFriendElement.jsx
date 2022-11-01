@@ -5,8 +5,8 @@ import { Link as RouterLink } from "react-router-dom";
 
 export default function DrawerFriendElement(props) {
   return (
-    <ThemeProvider theme={props.theme}>
-      <CssBaseline />
+    // <ThemeProvider theme={props.theme}>
+    //   <CssBaseline />
       <Box
         sx={{
           color:"inherit",
@@ -27,6 +27,6 @@ export default function DrawerFriendElement(props) {
         </Stack>
         <Divider />
       </Box>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 }

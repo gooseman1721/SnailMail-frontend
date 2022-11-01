@@ -16,9 +16,11 @@ export default function ChatBubble(props) {
       >
         <Stack>
           <Typography>
-            Friend: <b>{props.messageContent} </b>
+            Friend: <b>{props.messageContent}</b>
           </Typography>
-          <Typography>sent at: {props.messageCreatedDatetime}</Typography>
+          <Typography fontSize="12px">
+            sent at: {props.messageCreatedDatetime}
+          </Typography>
         </Stack>
       </Box>
     );
@@ -38,7 +40,9 @@ export default function ChatBubble(props) {
         <Typography>
           Me: <b>{props.messageContent} </b>
         </Typography>
-        <Typography>sent at: {props.messageCreatedDatetime}</Typography>
+        <Typography fontSize="12px">
+          sent at: {props.messageCreatedDatetime}
+        </Typography>
       </Stack>
     </Box>
   );

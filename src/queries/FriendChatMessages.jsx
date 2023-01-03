@@ -14,24 +14,20 @@ export default function FriendChatMessages(props) {
         props.friendId
       ),
     {
-      refetchInterval: 5000,
+      refetchInterval: 30000,
     }
   );
-  
-  const [ refreshState, setRefreshState] = useState(props.refresh);
+
+  const [refreshState, setRefreshState] = useState(props.refresh);
 
   useEffect(() => {
-    console.log("UseEffect call");
     if (refreshState) {
-      
       refetch();
       setRefreshState(false);
       props.setRefresh(false);
-    }
-    else {
+    } else {
       setRefreshState(props.refresh);
-    };
-
+    }
   }, [props.refresh, refreshState]);
 
   if (isLoading) {
@@ -41,11 +37,6 @@ export default function FriendChatMessages(props) {
   if (isError) {
     return <>Error: {error.message}</>;
   }
-
-  // if (props.refresh) {
-  //   refetch();
-  //   // props.setRefresh(false);
-  // }
 
   const msgList = data.all_messages?.length ? (
     data.all_messages.map((message) => {
@@ -72,5 +63,9 @@ export default function FriendChatMessages(props) {
   //   );
   // });
 
-  return <>{msgList} refstate: {refreshState.toString()}</>;
+  return (
+    <>
+      {msgList} refstate: {refreshState.toString()}
+    </>
+  );
 }

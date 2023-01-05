@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { useFiefTokenInfo, useFiefUserinfo } from "@fief/fief/react";
 import { useMutation } from "@tanstack/react-query";
 
@@ -10,7 +10,6 @@ import FriendChatMessages from "../queries/FriendChatMessages";
 import { backendBaseUrl, send_message } from "../APIServices";
 import { useEffect } from "react";
 
-let ws = new WebSocket("ws://127.0.0.1:7000/ws_new_chat_message/");
 
 export default function ChatPage() {
   const { userId } = useParams();
@@ -28,8 +27,7 @@ export default function ChatPage() {
     element.scrollTo(0, 0);
   }
 
-  const [refreshMessages, setRefreshMessages] = useState(false);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useOutletContext();
 
   const sendMessage = useMutation((args) => {
     return send_message(
@@ -41,25 +39,8 @@ export default function ChatPage() {
   });
 
   useEffect(() => {
-    let socketId = Math.floor(Math.random() * 100000);
-    ws = new WebSocket(`ws://127.0.0.1:7000/ws_new_chat_message/${socketId}/`);
-    ws.addEventListener("open", () => {
-      console.log("socket open");
-      ws.send(userInfo.email);
-    });
-    ws.addEventListener("message", (event) => {
-      setNewMessage(event.data);
-      setRefreshMessages(true);
-      console.log(newMessage);
-    });
-
     scrollToBottom(scrollBottom.current);
-
-    return () => {
-      ws.close();
-      console.log("socket close");
-    };
-  }, [userId]);
+  }, [userId, newMessage]);
 
   return (
     <>
@@ -86,8 +67,8 @@ export default function ChatPage() {
             <FriendChatMessages
               accessToken={tokenResponse.access_token}
               friendId={parseInt(userId)}
-              refresh={refreshMessages}
-              setRefresh={setRefreshMessages}
+              refresh={newMessage}
+              setRefresh={setNewMessage}
             />
           </Box>
         </Box>
@@ -107,9 +88,8 @@ export default function ChatPage() {
                   friendId: userId,
                   messageText: textFieldValue,
                 });
-                ws.send(textFieldValue);
                 setTextFieldValue("");
-                setRefreshMessages(true);
+                setNewMessage(true);
               }
             }}
           />

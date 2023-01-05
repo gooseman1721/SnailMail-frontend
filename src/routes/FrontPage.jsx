@@ -23,7 +23,7 @@ import {
   Icon,
   Divider,
   Autocomplete,
-  Button
+  Button,
 } from "@mui/material";
 import { ChevronLeft, Outlet, PeopleAltRounded } from "@mui/icons-material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -90,14 +90,33 @@ export default function FrontPage(props) {
   const handleDrawerClose = () => setOpenDrawer(false);
 
   const tokenResponse = useFiefTokenInfo();
+  const accessToken = tokenResponse.access_token;
+  const userInfo = useFiefUserinfo();
   const [userData, setUserData] = useState(null);
+  const [newMessage, setNewMessage] = useState(false);
 
   useEffect(() => {
     get_data_after_user_login(backendBaseUrl, tokenResponse.access_token).then(
       (data) => setUserData(data)
     );
+    let socketId = Math.floor(Math.random() * 100000);
+    let ws = new WebSocket(
+      `ws://127.0.0.1:7000/ws_new_chat_message/${socketId}/`
+    );
+    ws.addEventListener("open", () => {
+      console.log("socket open");
+      ws.send(
+        JSON.stringify({ email: userInfo.email, access_token: accessToken })
+      );
+    });
+    ws.addEventListener("message", () => {
+      setNewMessage(true);
+    });
+    return () => {
+      ws.close();
+      console.log("socket close");
+    };
   }, []);
-
 
   return (
     <ThemeProvider theme={props.theme}>
@@ -160,7 +179,7 @@ export default function FrontPage(props) {
         </Drawer>
         <Main open={openDrawer} sx={{ alignSelf: "center" }}>
           <DrawerHeader />
-          <RouterOutlet />
+          <RouterOutlet context={[newMessage, setNewMessage]} />
           {/* <Stack direction="row" flexWrap="wrap">
             <FrontPageChatRoomCard theme={props.theme} />
             <FrontPageChatRoomCard theme={props.theme} />

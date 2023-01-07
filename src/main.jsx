@@ -53,21 +53,28 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <FrontPageCards />
+        element: (
+          <RequireAuth>
+            <FrontPageCards />
+          </RequireAuth>
+        ),
       },
       {
         path: "chat/user/:userId",
-        element: <ChatPage />
-
+        element: (
+          <RequireAuth>
+            <ChatPage />
+          </RequireAuth>
+        ),
       },
       {
-        path: "chat/room/:roomId"
+        path: "chat/room/:roomId",
       },
       {
         path: "test/",
         element: <FrontPageCards />,
-      }
-    ]
+      },
+    ],
   },
   {
     path: "callback/",

@@ -93,7 +93,9 @@ export default function FrontPage(props) {
   const accessToken = tokenResponse.access_token;
   const userInfo = useFiefUserinfo();
   const [userData, setUserData] = useState(null);
+  const [newMessageContent, setNewMessageContent] = useState(false);
   const [newMessage, setNewMessage] = useState(false);
+  const [msgCount, setMsgCount] = useState(0);
 
   useEffect(() => {
     get_data_after_user_login(backendBaseUrl, tokenResponse.access_token).then(
@@ -109,8 +111,10 @@ export default function FrontPage(props) {
         JSON.stringify({ email: userInfo.email, access_token: accessToken })
       );
     });
-    ws.addEventListener("message", () => {
+    ws.addEventListener("message", (event) => {
+      setNewMessageContent(event.data);
       setNewMessage(true);
+      setMsgCount((prevCount) => prevCount + 1);
     });
     return () => {
       ws.close();
@@ -174,12 +178,17 @@ export default function FrontPage(props) {
           </Button>
           <Divider />
           <Stack>
-            <GetUserFriendsDrawer accessToken={tokenResponse.access_token} />
+            <GetUserFriendsDrawer
+              accessToken={tokenResponse.access_token}
+              newMessage={newMessageContent}
+            />
           </Stack>
         </Drawer>
         <Main open={openDrawer} sx={{ alignSelf: "center" }}>
           <DrawerHeader />
-          <RouterOutlet context={[newMessage, setNewMessage]} />
+          <RouterOutlet
+            context={[newMessage, setNewMessage, newMessageContent, msgCount]}
+          />
           {/* <Stack direction="row" flexWrap="wrap">
             <FrontPageChatRoomCard theme={props.theme} />
             <FrontPageChatRoomCard theme={props.theme} />

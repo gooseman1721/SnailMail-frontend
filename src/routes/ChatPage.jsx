@@ -10,7 +10,6 @@ import FriendChatMessages from "../queries/FriendChatMessages";
 import { backendBaseUrl, send_message } from "../APIServices";
 import { useEffect } from "react";
 
-
 export default function ChatPage() {
   const { userId } = useParams();
   const tokenResponse = useFiefTokenInfo();
@@ -27,7 +26,9 @@ export default function ChatPage() {
     element.scrollTo(0, 0);
   }
 
-  const [newMessage, setNewMessage] = useOutletContext();
+  const [newMessage, setNewMessage, newMessageContent, msgCount] =
+    useOutletContext();
+  const [refresh, setRefresh] = useState(false);
 
   const sendMessage = useMutation((args) => {
     return send_message(
@@ -40,7 +41,15 @@ export default function ChatPage() {
 
   useEffect(() => {
     scrollToBottom(scrollBottom.current);
-  }, [userId, newMessage]);
+    console.log("useffect");
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId === newMessageContent) {
+      setRefresh(true);
+      scrollToBottom(scrollBottom.current);
+    }
+  }, [newMessageContent, msgCount]);
 
   return (
     <>
@@ -67,8 +76,8 @@ export default function ChatPage() {
             <FriendChatMessages
               accessToken={tokenResponse.access_token}
               friendId={parseInt(userId)}
-              refresh={newMessage}
-              setRefresh={setNewMessage}
+              refresh={refresh}
+              setRefresh={setRefresh}
             />
           </Box>
         </Box>
@@ -89,7 +98,7 @@ export default function ChatPage() {
                   messageText: textFieldValue,
                 });
                 setTextFieldValue("");
-                setNewMessage(true);
+                setRefresh(true);
               }
             }}
           />

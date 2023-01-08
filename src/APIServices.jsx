@@ -125,6 +125,21 @@ async function get_friend_message_data(url = "", access_token, friend_id) {
   return response.json();
 }
 
+async function get_friend_last_message(url = "", access_token, friend_id) {
+  const response = await fetch(
+    url + `/user/friends/${friend_id}/messages/last/`,
+    {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.json();
+}
+
 async function send_message(url = "", access_token, friend_id, message_text) {
   const data = { content: message_text };
   console.log(data.content);
@@ -151,5 +166,6 @@ export {
   get_friend_requests_to_user,
   accept_friend_request,
   get_friend_message_data,
-  send_message
+  get_friend_last_message,
+  send_message,
 };

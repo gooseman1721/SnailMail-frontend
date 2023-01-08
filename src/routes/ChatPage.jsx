@@ -28,7 +28,7 @@ export default function ChatPage() {
 
   const [newMessage, setNewMessage, newMessageContent, msgCount] =
     useOutletContext();
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState(true);
 
   const sendMessage = useMutation((args) => {
     return send_message(

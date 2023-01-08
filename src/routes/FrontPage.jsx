@@ -29,10 +29,10 @@ import { ChevronLeft, Outlet, PeopleAltRounded } from "@mui/icons-material";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import styled from "@emotion/styled";
 
-import DrawerFriendElement from "../components/DrawerFriendElement";
-import FrontPageChatRoomCard from "../components/FrontPageChatRoomCard";
-
-import { backendBaseUrl, get_data_after_user_login } from "../APIServices";
+import {
+  backendBaseUrl,
+  get_data_after_user_login,
+} from "../APIServices";
 import GetUserFriendsDrawer from "../queries/GetUserFriendsDrawer";
 
 // An easy hack to have the messages drawer larger on small screens
@@ -96,6 +96,7 @@ export default function FrontPage(props) {
   const [newMessageContent, setNewMessageContent] = useState(false);
   const [newMessage, setNewMessage] = useState(false);
   const [msgCount, setMsgCount] = useState(0);
+  const [drawerRefresh, setDrawerRefresh] = useState(false);
 
   useEffect(() => {
     get_data_after_user_login(backendBaseUrl, tokenResponse.access_token).then(
@@ -115,6 +116,7 @@ export default function FrontPage(props) {
       setNewMessageContent(event.data);
       setNewMessage(true);
       setMsgCount((prevCount) => prevCount + 1);
+      setDrawerRefresh(true);
     });
     return () => {
       ws.close();
@@ -180,7 +182,9 @@ export default function FrontPage(props) {
           <Stack>
             <GetUserFriendsDrawer
               accessToken={tokenResponse.access_token}
-              newMessage={newMessageContent}
+              newMessageFrom={newMessageContent}
+              refresh={drawerRefresh}
+              setRefresh={setDrawerRefresh}
             />
           </Stack>
         </Drawer>
